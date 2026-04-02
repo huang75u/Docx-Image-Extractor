@@ -83,9 +83,10 @@ def extract_images(file_path, text_widget):
         messagebox.showerror("错误", f"发生未知错误: {e}")
 
 def select_file_and_run(text_widget):
-    # 弹出文件选择框
+    # 弹出文件选择框，并设置默认打开的路径
     file_path = filedialog.askopenfilename(
         title="选择一个 Word (.docx) 文件",
+        initialdir=r"D:\Huang_Work_Space\自用工具\存图的doc", # <--- 这里添加了默认路径
         filetypes=[("Word 文档", "*.docx"), ("所有文件", "*.*")]
     )
     if file_path:
