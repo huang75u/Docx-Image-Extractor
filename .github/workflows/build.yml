@@ -1,6 +1,5 @@
-name: Build Windows EXE
+name: Build Windows Program
 
-# 当你手动点击运行，或者代码有更新时触发
 on:
   workflow_dispatch:
   push:
@@ -8,7 +7,6 @@ on:
 
 jobs:
   build:
-    # 核心：指定这是一台最新的 Windows 云服务器
     runs-on: windows-latest
 
     steps:
@@ -25,12 +23,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyinstaller
 
-    - name: 开始打包为 EXE (添加了 --noconsole 隐藏黑框)
+    - name: 开始打包为程序文件夹 (去除了 --onefile)
       run: |
-        pyinstaller --onefile --noconsole --icon=NONE local_extractor.py
+        pyinstaller --noconsole --icon=NONE local_extractor.py
 
     - name: 上传打包好的成品供下载
       uses: actions/upload-artifact@v4
       with:
-        name: Extractor-Program
-        path: dist/local_extractor.exe
+        name: Extractor-Program-Folder
+        path: dist/local_extractor/
